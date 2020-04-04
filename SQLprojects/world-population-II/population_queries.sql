@@ -32,12 +32,17 @@ WHERE countries.continent = 'South America'
 
 -- What country had the smallest population in 2007?
 
-SELECT countries.name AS 'Smallest population in 2007'
-FROM countries
-JOIN population_years
-  ON countries.id = population_years.country_id
-WHERE population_years.population = ( SELECT MIN(population) FROM population_years WHERE population_years.year = 2007 )
-  AND population_years.year = 2007;
+SELECT MIN(population), name FROM population_years
+INNER JOIN countries ON
+countries.id = population_years.country_id
+WHERE year = 2007;
+
+-- SELECT countries.name AS 'Smallest population in 2007'
+-- FROM countries
+-- JOIN population_years
+--   ON countries.id = population_years.country_id
+-- WHERE population_years.population = ( SELECT MIN(population) FROM population_years WHERE population_years.year = 2007 )
+--   AND population_years.year = 2007;
 
 
 
